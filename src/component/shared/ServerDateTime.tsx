@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import dayjs from 'dayjs';
 import timezone from 'dayjs/plugin/timezone';
 import utc from 'dayjs/plugin/utc';
@@ -17,9 +18,9 @@ const ServerDateTime = ({
   date?: string;
 }) => {
   return (
-    <span className='date-time' style={{ color }}>
+    <Box component='span' className='date-time' style={{ color }}>
       {dayjs(date).tz(cityTimezone).format(timeFormat)}
-    </span>
+    </Box>
   );
 };
 
