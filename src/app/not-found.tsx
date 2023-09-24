@@ -1,6 +1,5 @@
 import { Box } from '@mui/material';
 import { Metadata } from 'next';
-import Link from 'next/link';
 import * as React from 'react';
 import { RiAlarmWarningFill } from 'react-icons/ri';
 
@@ -19,7 +18,7 @@ export default function NotFound() {
           />
           <h1>Page Not Found</h1>
           <h5>change this in app/not-found.tsx</h5>
-          <Link href='/'>Back to home</Link>
+          <a href='/'>Back to home</a>
         </div>
       </Box>
     </main>

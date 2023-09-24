@@ -1,4 +1,4 @@
-import { openGraph } from '@/utils/og';
+import { openGraph } from '@/util/shared/og';
 
 describe('Open Graph function should work correctly', () => {
   it('should not return templateTitle when not specified', () => {
