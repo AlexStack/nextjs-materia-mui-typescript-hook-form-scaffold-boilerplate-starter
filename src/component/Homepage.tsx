@@ -14,7 +14,10 @@ export default function Homepage({
     <main>
       <section>
         <Box sx={{ textAlign: 'center' }}>
-          <PinDropIcon />
+          <PinDropIcon
+            className='page-title'
+            sx={{ width: '3rem', height: '3rem' }}
+          />
           <Typography
             variant='h5'
             component='h1'
@@ -39,6 +42,10 @@ export default function Homepage({
             Fetch & cache data from 2 remote APIs test: <br />
             The latest React version is {reactVersion}, and the latest NextJs
             version is {nextJsVersion}
+            <Box sx={{ color: 'grey', fontSize: 10 }}>
+              On dev environment, you can see how long it takes on console, e.g.
+              getApiResponse: 0.05s
+            </Box>
           </Typography>
 
           <Box sx={{ m: 5 }}>
@@ -57,7 +64,7 @@ export default function Homepage({
               Click here to deploy a demo site to your Vercel in 1 minute
             </Link>
           </Box>
-          <Box sx={{ m: 5 }}>
+          <Box sx={{ m: 5, a: { color: 'blue' } }}>
             <Link
               href='/api/test?from=github&nextjs=yes&mui=yes&tailwind=no'
               target='_blank'
@@ -74,10 +81,14 @@ export default function Homepage({
           </Box>
 
           <Box sx={{ m: 5 }}>
-            <Link href='/test-page-not-exists'>Test 404 page not found</Link>
+            <Link href='/test-page-not-exists'>
+              Test 404 page not found (mock file not exists)
+            </Link>
           </Box>
           <Box sx={{ m: 5 }}>
-            <a href='/?slug=testError500'>Test 500 error page</a>
+            <a href='/?slug=testError500'>
+              Test 500 error page (mock server side throw error)
+            </a>
           </Box>
         </Box>
       </section>
