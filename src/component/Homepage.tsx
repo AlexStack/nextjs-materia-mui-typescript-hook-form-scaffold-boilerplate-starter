@@ -2,7 +2,7 @@ import PinDropIcon from '@mui/icons-material/PinDrop';
 import { Box, Typography } from '@mui/material';
 import Link from 'next/link';
 
-import PageFooter from '@/component/PageFooter';
+import PageFooter from '@/component/shared/PageFooter';
 import { SITE_CONFIG } from '@/constant';
 
 export default function Homepage({ reactVersion = 'unknown' }) {
@@ -46,7 +46,7 @@ export default function Homepage({ reactVersion = 'unknown' }) {
             <Link href='/test-page-not-exists'>Test 404 page not found</Link>
           </Box>
           <Box sx={{ m: 5 }}>
-            <Link href='/?slug=testError500'>Test 500 error page</Link>
+            <a href='/?slug=testError500'>Test 500 error page</a>
           </Box>
         </Box>
       </section>
