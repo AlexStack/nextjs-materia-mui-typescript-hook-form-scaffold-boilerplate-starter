@@ -6,7 +6,10 @@ import PageFooter from '@/component/shared/PageFooter';
 import ReactHookForm from '@/component/shared/ReactHookForm';
 import { SITE_CONFIG } from '@/constant';
 
-export default function Homepage({ reactVersion = 'unknown' }) {
+export default function Homepage({
+  reactVersion = 'unknown',
+  nextJsVersion = 'unknown',
+}) {
   return (
     <main>
       <section>
@@ -33,7 +36,9 @@ export default function Homepage({ reactVersion = 'unknown' }) {
             gutterBottom
             sx={{ color: 'green', mt: 3 }}
           >
-            Get data from api test: The latest React version is {reactVersion}
+            Fetch & cache data from 2 remote APIs test: <br />
+            The latest React version is {reactVersion}, and the latest NextJs
+            version is {nextJsVersion}
           </Typography>
 
           <Box sx={{ m: 5 }}>
@@ -57,12 +62,14 @@ export default function Homepage({ reactVersion = 'unknown' }) {
               href='/api/test?from=github&nextjs=yes&mui=yes&tailwind=no'
               target='_blank'
             >
-              Test NextJs API method GET with parameters
+              Test local NextJs API /api/test method GET with parameters
             </Link>
           </Box>
 
           <Box sx={{ m: 5 }}>
-            <h4>Test NextJs API method POST with parameters</h4>
+            <h4>
+              Test local NextJs API /api/test method POST with form variables
+            </h4>
             <ReactHookForm />
           </Box>
 
