@@ -1,14 +1,22 @@
-// !STARTERCONF You should delete this page
-
 import { render, screen } from '@testing-library/react';
 
-import HomePage from '@/app/page';
+import Homepage from '@/component/Homepage';
+
+export function mockFetch(data: unknown) {
+  return jest.fn().mockImplementation(() =>
+    Promise.resolve({
+      ok: true,
+      json: () => data,
+    })
+  );
+}
 
 describe('Homepage', () => {
   it('renders the Components', () => {
-    render(<HomePage />);
+    window.fetch = mockFetch({});
+    render(<Homepage />);
 
-    const heading = screen.getByText(/A starter for Next.js/i);
+    const heading = screen.getByText(/HiHB/i);
 
     expect(heading).toBeInTheDocument();
   });
