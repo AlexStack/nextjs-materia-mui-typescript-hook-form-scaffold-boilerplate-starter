@@ -48,7 +48,7 @@ This starter is original from theodorusclarence/ts-nextjs-tailwind-starter, than
 
 2. Test online: Deploy to Vercel by one click
 
-   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/AlexStack/nextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter)
+   [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2FAlexStack%2Fnextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter&showOptionalTeamCreation=false)
 
 ### 2. Install dependencies
 

@@ -47,7 +47,7 @@ export default async function HomePage({
 
           <Box sx={{ m: 5 }}>
             <Link
-              href='https://vercel.com/new/git/external?repository-url=https://github.com/AlexStack/nextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter'
+              href='https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2FAlexStack%2Fnextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter&showOptionalTeamCreation=false'
               target='_blank'
             >
               Click here to deploy a demo site to your Vercel in 1 minute
