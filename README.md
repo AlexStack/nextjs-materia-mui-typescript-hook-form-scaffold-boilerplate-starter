@@ -18,6 +18,7 @@ This repository is 🔋 battery packed with:
 - 💨 Material UI — Ready to use Material Design components [check here for the usage](https://mui.com/material-ui/getting-started/usage/)
 - 🎨 React Hook Form — Performant, flexible and extensible forms with easy-to-use validation
 - ⏰ Day.js — A modern day JavaScript Date Library
+- 🔥 Utils: getApiResponse - consoleLog
 - 🃏 Jest — Configured for unit testing
 - 📈 Absolute Import and Path Alias — Import components using `@/` prefix
 - 📏 ESLint — Find and fix problems in your code, also will **auto sort** your imports
