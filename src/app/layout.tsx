@@ -1,7 +1,9 @@
+import { Container } from '@mui/material';
+import GlobalStyles from '@mui/material/GlobalStyles';
 import { Metadata } from 'next';
 import * as React from 'react';
 
-import { SITE_CONFIG } from '@/constant/config';
+import { GLOBAL_STYLES, SITE_CONFIG } from '@/constant';
 
 // !STARTERCONF Change these default meta
 // !STARTERCONF Look at @/constant/config to change them
@@ -50,8 +52,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html>
-      <body>{children}</body>
+    <html lang='en'>
+      <GlobalStyles styles={GLOBAL_STYLES} />
+      <body>
+        <Container sx={{ pl: 0, pr: 0 }}>{children}</Container>
+      </body>
     </html>
   );
 }

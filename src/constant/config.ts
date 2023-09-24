@@ -1,3 +1,5 @@
+import { blue, grey } from '@mui/material/colors';
+
 export const SITE_CONFIG = {
   title: 'NextJs 13.x + MUI 5.x + TypeScript Starter',
   description:
@@ -10,3 +12,18 @@ export const HIDE_DEBUG_ARY = [
   // 'getApiResponse',
   'getMongoDbApiData',
 ];
+
+export const GLOBAL_STYLES = {
+  body: { margin: 4 },
+  '.page-title': { color: 'darkblue' },
+  '.page-subtitle': { color: grey[600] },
+  a: {
+    textDecoration: 'underline',
+    textDecorationColor: blue[800],
+    color: blue['700'],
+    fontSize: '1rem',
+    fontWeight: 400,
+    lineHeight: '1.8',
+    letterSpacing: '0.00938em',
+  },
+};
