@@ -1,71 +1,69 @@
-'use client';
-
-import Head from 'next/head';
+import PinDropIcon from '@mui/icons-material/PinDrop';
+import { Box, Typography } from '@mui/material';
+import Link from 'next/link';
 import * as React from 'react';
 
-import ArrowLink from '@/components/links/ArrowLink';
-import ButtonLink from '@/components/links/ButtonLink';
-import UnderlineLink from '@/components/links/UnderlineLink';
-import UnstyledLink from '@/components/links/UnstyledLink';
+import PageFooter from '@/components/PageFooter';
 
-/**
- * SVGR Support
- * Caveat: No React Props Type.
- *
- * You can override the next-env if the type is important to you
- * @see https://stackoverflow.com/questions/68103844/how-to-override-next-js-svg-module-declaration
- */
-import Logo from '~/svg/Logo.svg';
+import { SITE_CONFIG } from '@/constant';
 
 // !STARTERCONF -> Select !STARTERCONF and CMD + SHIFT + F
 // Before you begin editing, follow all comments with `STARTERCONF`,
 // to customize the default configuration.
 
-export default function HomePage() {
+const loadDataFromApi = async (slug?: string) => {
+  if (slug === 'testError500') {
+    throw new Error('This is a ssr 500 test error');
+  }
+};
+
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+}) {
+  await loadDataFromApi(searchParams['slug']);
   return (
     <main>
-      <Head>
-        <title>Hi</title>
-      </Head>
-      <section className='bg-white'>
-        <div className='layout relative flex min-h-screen flex-col items-center justify-center py-12 text-center'>
-          <Logo className='w-16' />
-          <h1 className='mt-4'>Next.js + Tailwind CSS + TypeScript Starter</h1>
-          <p className='mt-2 text-sm text-gray-800'>
-            A starter for Next.js, Tailwind CSS, and TypeScript with Absolute
-            Import, Seo, Link component, pre-configured with Husky{' '}
-          </p>
-          <p className='mt-2 text-sm text-gray-700'>
-            <ArrowLink href='https://github.com/theodorusclarence/ts-nextjs-tailwind-starter'>
-              See the repository
-            </ArrowLink>
-          </p>
+      <section>
+        <Box sx={{ textAlign: 'center' }}>
+          <PinDropIcon />
+          <Typography variant='h5' component='h1' gutterBottom>
+            {SITE_CONFIG.title}
+          </Typography>
 
-          <ButtonLink className='mt-6' href='/components' variant='light'>
-            See all components
-          </ButtonLink>
+          <Typography variant='subtitle2' gutterBottom>
+            {SITE_CONFIG.description}
+          </Typography>
 
-          <UnstyledLink
-            href='https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Ftheodorusclarence%2Fts-nextjs-tailwind-starter'
-            className='mt-4'
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              width='92'
-              height='32'
-              src='https://vercel.com/button'
-              alt='Deploy with Vercel'
-            />
-          </UnstyledLink>
+          <Box sx={{ m: 5 }}>
+            <Link
+              href='https://github.com/AlexStack/nextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter'
+              target='_blank'
+            >
+              See the Github repository page
+            </Link>
+          </Box>
 
-          <footer className='absolute bottom-2 text-gray-700'>
-            © {new Date().getFullYear()} By{' '}
-            <UnderlineLink href='https://theodorusclarence.com?ref=tsnextstarter'>
-              Theodorus Clarence
-            </UnderlineLink>
-          </footer>
-        </div>
+          <Box sx={{ m: 5 }}>
+            <Link
+              href='https://vercel.com/new/git/external?repository-url=https://github.com/AlexStack/nextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter'
+              target='_blank'
+            >
+              Click here to deploy a demo site to your Vercel in 1 minute
+            </Link>
+          </Box>
+
+          <Box sx={{ m: 5 }}>
+            <Link href='/test-page-not-exists'>Test 404 page not found</Link>
+          </Box>
+
+          <Box sx={{ m: 5 }}>
+            <Link href='/?slug=testError500'>Test 500 error page</Link>
+          </Box>
+        </Box>
       </section>
+      <PageFooter />
     </main>
   );
 }
