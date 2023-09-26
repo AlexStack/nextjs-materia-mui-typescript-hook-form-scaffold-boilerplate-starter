@@ -24,6 +24,7 @@ export default function Error({
           <WarningIcon />
           <h1>Oops, something went wrong!</h1>
           <h5>change this in app/error.tsx</h5>
+          <h4>{error.message}</h4>
           <Box sx={{ m: 5 }}>
             <Button onClick={reset}>Try again</Button>
           </Box>
