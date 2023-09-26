@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import { HIDE_DEBUG_ARY, SHOW_CONSOLE_LOG } from '@/constant';
+import { HIDE_DEBUG_ARY, SHOW_CONSOLE_LOG } from '@/constants';
 
 export const consoleLog = (
   var1: unknown,

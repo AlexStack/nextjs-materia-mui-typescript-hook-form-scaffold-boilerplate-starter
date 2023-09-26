@@ -3,7 +3,8 @@ import GlobalStyles from '@mui/material/GlobalStyles';
 import { Metadata } from 'next';
 import * as React from 'react';
 
-import { GLOBAL_STYLES, SITE_CONFIG } from '@/constant';
+import { SITE_CONFIG } from '@/constants';
+import { GLOBAL_STYLES } from '@/styles';
 
 // !STARTERCONF Change these default meta
 // !STARTERCONF Look at @/constant/config to change them

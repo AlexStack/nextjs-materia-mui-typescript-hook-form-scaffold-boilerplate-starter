@@ -1,5 +1,8 @@
-import Homepage from '@/component/Homepage';
-import { getApiResponse } from '@/util/shared/get-api-response';
+import Homepage from '@/components/Homepage';
+
+import { getApiResponse } from '@/utils/shared/get-api-response';
+
+import { PageParams } from '@/types';
 
 const loadDataFromApi = async (slug?: string) => {
   if (slug === 'testError500') {
@@ -24,12 +27,8 @@ const loadDataFromApi = async (slug?: string) => {
   };
 };
 
-interface AppHomeProps {
-  searchParams: { [key: string]: string | undefined };
-}
-
-export default async function AppHome({ searchParams }: AppHomeProps) {
-  const apiResult = await loadDataFromApi(searchParams['slug']);
+const AppHome = async ({ searchParams }: PageParams) => {
+  const apiResult = await loadDataFromApi(searchParams?.['slug']);
 
   return (
     <Homepage
@@ -37,4 +36,6 @@ export default async function AppHome({ searchParams }: AppHomeProps) {
       nextJsVersion={apiResult?.nextJsVersion}
     />
   );
-}
+};
+
+export default AppHome;

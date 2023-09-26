@@ -1,5 +1,5 @@
-import { IS_PROD } from '@/constant';
-import { consoleLog } from '@/util/shared/console-log';
+import { IS_PROD } from '@/constants';
+import { consoleLog } from '@/utils/shared/console-log';
 
 export const getApiResponse = async <T>({
   apiEndpoint,

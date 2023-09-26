@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import * as React from 'react';
 
-import ServerDateTime from '@/component/shared/ServerDateTime';
+import ServerDateTime from '@/components/shared/ServerDateTime';
 
 const PageFooter = () => {
   return (

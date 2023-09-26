@@ -2,9 +2,10 @@ import PinDropIcon from '@mui/icons-material/PinDrop';
 import { Box, Typography } from '@mui/material';
 import Link from 'next/link';
 
-import PageFooter from '@/component/shared/PageFooter';
-import ReactHookForm from '@/component/shared/ReactHookForm';
-import { SITE_CONFIG } from '@/constant';
+import PageFooter from '@/components/shared/PageFooter';
+import ReactHookForm from '@/components/shared/ReactHookForm';
+
+import { SITE_CONFIG } from '@/constants';
 
 export default function Homepage({
   reactVersion = 'unknown',

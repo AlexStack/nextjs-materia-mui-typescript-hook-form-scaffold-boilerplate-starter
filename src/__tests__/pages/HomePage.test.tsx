@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import Homepage from '@/component/Homepage';
+import Homepage from '@/components/Homepage';
 
 export function mockFetch(data: unknown) {
   return jest.fn().mockImplementation(() =>

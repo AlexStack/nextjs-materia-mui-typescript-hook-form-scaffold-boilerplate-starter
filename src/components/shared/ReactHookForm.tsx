@@ -6,8 +6,8 @@ import React from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { consoleLog } from '@/util/shared/console-log';
-import { getApiResponse } from '@/util/shared/get-api-response';
+import { consoleLog } from '@/utils/shared/console-log';
+import { getApiResponse } from '@/utils/shared/get-api-response';
 
 const zodSchema = z.object({
   name: z.string().min(5).nonempty({ message: 'Name is required' }),
