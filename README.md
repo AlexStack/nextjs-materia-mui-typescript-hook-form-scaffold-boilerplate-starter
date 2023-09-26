@@ -96,3 +96,11 @@ TEMPLATE
 - [HiHB](https://hihb.com/)
 
 Are you using this starter? Please add your page (and repo) to the end of the list via a [Pull Request](https://github.com/AlexStack/nextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter/edit/main/README.md). 😃
+
+## Folder structure
+
+![image of folder structure](https://raw.githubusercontent.com/AlexStack/nextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter/main/public/images/next-mui-folders.png)
+
+## License
+
+- MIT
