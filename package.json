@@ -24,11 +24,12 @@
     "@mui/icons-material": "^5.14.9",
     "@mui/material": "^5.14.10",
     "dayjs": "^1.11.10",
-    "next": "^13.4.10",
+    "next": "^14.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.46.2",
-    "react-icons": "^4.10.1"
+    "react-icons": "^4.10.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.3.0",
@@ -41,7 +42,7 @@
     "@typescript-eslint/parser": "^5.62.0",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.45.0",
-    "eslint-config-next": "^13.4.10",
+    "eslint-config-next": "^14.0.1",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
