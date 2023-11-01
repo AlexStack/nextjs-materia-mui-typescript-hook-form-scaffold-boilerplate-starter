@@ -1,8 +1,8 @@
-# NextJs 13.x + MUI 5.x + React Hook Form + TypeScript Starter and Boilerplate
+# NextJs 14.x + MUI 5.x + React Hook Form + TypeScript Starter and Boilerplate
 
 <div align="center">
-  <h2>2023/2024: 🔋 NextJs 13.x + MUI 5.x + TypeScript Starter</h2>
-  <p>The scaffold for NextJs 13.x (App Router), React Hook Form, Material UI(MUI 5.x),Typescript and ESLint, and TypeScript with Absolute Import, Seo, Link component, pre-configured with Husky.</p>
+  <h2>2023/2024: 🔋 NextJs 14.x + MUI 5.x + TypeScript Starter</h2>
+  <p>The scaffold for NextJs 14.x (App Router), React Hook Form, Material UI(MUI 5.x),Typescript and ESLint, and TypeScript with Absolute Import, Seo, Link component, pre-configured with Husky.</p>
 
   <p>With simple example of NextJs API, React-hook-form with zod, fetch remote api, 404/500 error pages, MUI SSR usage</p>
 
@@ -16,7 +16,7 @@ If you prefer Tailwind css, check this: [Tailwind-CSS-Version](https://github.co
 
 This repository is 🔋 battery packed with:
 
-- ⚡️ Next.js 13.x with App Router
+- ⚡️ Next.js 14.x with App Router
 - ⚛️ React 18.x
 - ✨ TypeScript
 - 💨 Material UI — Ready to use Material Design components [check here for the usage](https://mui.com/material-ui/getting-started/usage/)
