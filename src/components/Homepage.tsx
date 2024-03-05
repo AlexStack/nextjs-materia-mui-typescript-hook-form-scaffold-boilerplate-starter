@@ -76,7 +76,7 @@ export default function Homepage({
 
           <Box sx={{ m: 5 }}>
             <h4>
-              Test local NextJs API /api/test method POST with form variables
+              Test local NextJs API /api/tes POST method (client-side component)
             </h4>
             <ReactHookForm />
           </Box>
