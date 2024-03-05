@@ -1,10 +1,10 @@
 # NextJs 14.x + MUI 5.x + React Hook Form + TypeScript Starter and Boilerplate
 
 <div align="center">
-  <h2>2023/2024: 🔋 NextJs 14.x + MUI 5.x + TypeScript Starter</h2>
+  <h2>2024/2025: 🔋 NextJs 14.x + MUI 5.x + TypeScript Starter</h2>
   <p>The scaffold for NextJs 14.x (App Router), React Hook Form, Material UI(MUI 5.x),Typescript and ESLint, and TypeScript with Absolute Import, Seo, Link component, pre-configured with Husky.</p>
 
-  <p>With simple example of NextJs API, React-hook-form with zod, fetch remote api, 404/500 error pages, MUI SSR usage</p>
+  <p>With simple example of NextJs API, React-hook-form with zod, fetch remote api, 404/500 error pages, MUI SSR usage, Styled component, MUI AlertBar, Client-side component</p>
 
 🚘🚘🚘 [**Click here to see an online demo**](https://mui-nextjs-ts.vercel.app) 🚘🚘🚘
 
