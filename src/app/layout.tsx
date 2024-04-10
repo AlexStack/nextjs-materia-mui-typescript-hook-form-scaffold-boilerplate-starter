@@ -15,8 +15,7 @@ export const metadata: Metadata = {
   },
   description: SITE_CONFIG.description,
   robots: { index: true, follow: true },
-  // !STARTERCONF this is the default favicon, you can generate your own from https://realfavicongenerator.net/
-  // ! copy to /favicon folder
+  metadataBase: new URL(SITE_CONFIG.url),
   icons: {
     icon: '/favicon/favicon.ico',
     shortcut: '/favicon/favicon-16x16.png',
