@@ -12,6 +12,12 @@ If you prefer Tailwind css, check this: [Tailwind-CSS-Version](https://github.co
 
 </div>
 
+## Demo
+
+![](./public/images/cover.png)
+
+🚘🚘🚘 [**Click here to see an online demo**](https://mui-nextjs-ts.vercel.app) 🚘🚘🚘
+
 ## Features
 
 This repository is 🔋 battery packed with:
