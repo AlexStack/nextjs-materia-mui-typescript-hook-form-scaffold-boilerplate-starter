@@ -4,7 +4,7 @@
   <h2>2024/2025: 🔋 NextJs 14.x + MUI 5.x + TypeScript Starter</h2>
   <p>The scaffold for NextJs 14.x (App Router), React Hook Form, Material UI(MUI 5.x),Typescript and ESLint, and TypeScript with Absolute Import, Seo, Link component, pre-configured with Husky.</p>
 
-  <p>With simple example of NextJs API, React-hook-form with zod, fetch remote api, 404/500 error pages, MUI SSR usage, Styled component, MUI AlertBar, Client-side component</p>
+  <p>With simple example of NextJs API, React-hook-form with zod, fetch remote api, 404/500 error pages, MUI SSR usage, Styled component, MUI AlertBar, MUI confirmation dialog, Loading button, Client-side component</p>
 
 🚘🚘🚘 [**Click here to see an online demo**](https://mui-nextjs-ts.vercel.app) 🚘🚘🚘
 
@@ -14,7 +14,7 @@ If you prefer Tailwind css, check this: [Tailwind-CSS-Version](https://github.co
 
 ## Demo
 
-![](./public/images/cover.png)
+[<img src="./public/images/cover.png">](https://mui-nextjs-ts.vercel.app)
 
 🚘🚘🚘 [**Click here to see an online demo**](https://mui-nextjs-ts.vercel.app) 🚘🚘🚘
 
