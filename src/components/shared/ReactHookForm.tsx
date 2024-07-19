@@ -3,14 +3,23 @@
 import styled from '@emotion/styled';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { NextPlan, Save } from '@mui/icons-material';
-import { Box, Button, FormHelperText, TextField } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import {
+  Avatar,
+  Box,
+  Button,
+  FormHelperText,
+  Stack,
+  TextField,
+} from '@mui/material';
+import { purple } from '@mui/material/colors';
+import React, { useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { useAlertBar } from '@/hooks/useAlertBar';
+import { useClientContext } from '@/hooks/useClientContext';
 import useConfirmationDialog from '@/hooks/useConfirmDialog';
 
-import { AlertBar, AlertBarProps } from '@/components/shared/AlertBar';
 import SubmitButton from '@/components/shared/SubmitButton';
 
 import { consoleLog } from '@/utils/shared/console-log';
@@ -42,12 +51,10 @@ const ReactHookForm: React.FC = () => {
   const [apiResult, setApiResult] = React.useState<FormValues>();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
-  const [alertBarProps, setAlertBarProps] = useState<AlertBarProps>({
-    message: '',
-    severity: 'info',
-  });
+  const { setAlertBarProps, renderAlertBar } = useAlertBar();
 
-  const dialog = useConfirmationDialog();
+  const { openConfirmDialog, renderConfirmationDialog } =
+    useConfirmationDialog();
 
   const {
     handleSubmit,
@@ -57,6 +64,8 @@ const ReactHookForm: React.FC = () => {
   } = useForm<FormValues>({
     resolver: zodResolver(zodSchema),
   });
+
+  const { fetchCount, updateClientCtx } = useClientContext();
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
@@ -77,6 +86,7 @@ const ReactHookForm: React.FC = () => {
         message: 'Form submitted successfully',
         severity: 'success',
       });
+      updateClientCtx({ fetchCount: fetchCount + 1 });
     } catch (error) {
       consoleLog('handleSubmit ERROR', error);
       setIsSubmitting(false);
@@ -95,7 +105,7 @@ const ReactHookForm: React.FC = () => {
         autoHideSeconds: 4,
       });
     }
-  }, [isValid, errors]);
+  }, [isValid, errors, setAlertBarProps]);
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
@@ -146,11 +156,31 @@ const ReactHookForm: React.FC = () => {
       </SubmitButton>
 
       <Box sx={{ m: 5 }}>
+        <Stack
+          sx={{ mb: 3 }}
+          direction='row'
+          spacing={1}
+          justifyContent='center'
+          alignItems='center'
+        >
+          <div>Total fetch count from React Context:</div>
+          <Avatar
+            sx={{
+              bgcolor: purple[500],
+              width: 22,
+              height: 22,
+              fontSize: '0.8rem',
+            }}
+            variant='circular'
+          >
+            {fetchCount}
+          </Avatar>
+        </Stack>
         <Button
           variant='outlined'
           onClick={() => {
             const randomNumber = Math.floor(Math.random() * 90) + 10;
-            dialog.openConfirmDialog({
+            openConfirmDialog({
               title: 'Change form name',
               content: `Are you sure to change above form name to Alex ${randomNumber} and submit?`,
               onConfirm: () => {
@@ -166,12 +196,9 @@ const ReactHookForm: React.FC = () => {
         </Button>
       </Box>
 
-      <AlertBar
-        onClose={() => setAlertBarProps({ message: '' })}
-        {...alertBarProps}
-      />
+      {renderAlertBar()}
 
-      {dialog.renderConfirmationDialog()}
+      {renderConfirmationDialog()}
     </StyledForm>
   );
 };
