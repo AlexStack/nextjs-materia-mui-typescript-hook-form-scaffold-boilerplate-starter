@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 
 'use client';
-import { Send } from '@mui/icons-material';
+import styled from '@emotion/styled';
+import { Autorenew, Send } from '@mui/icons-material';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
+import { purple } from '@mui/material/colors';
 import Stack from '@mui/material/Stack';
 import React, { useEffect, useState } from 'react';
 
@@ -11,6 +13,28 @@ import { useAlertBar } from '@/hooks/useAlertBar';
 import { useClientContext } from '@/hooks/useClientContext';
 
 import SubmitButton from '@/components/shared/SubmitButton';
+
+const StyledRefreshButton = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0.5rem;
+  cursor: pointer;
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+  :hover {
+    svg {
+      path {
+        fill: ${purple[500]};
+      }
+    }
+    .MuiAvatar-circular {
+      background-color: ${purple[50]};
+    }
+  }
+`;
 
 const DisplayRandomPicture = () => {
   const [imageUrl, setImageUrl] = useState('');
@@ -59,6 +83,7 @@ const DisplayRandomPicture = () => {
       justifyContent='center'
       alignItems='center'
       spacing={2}
+      sx={{ position: 'relative', width: '300px', margin: '0 auto' }}
     >
       {error && <p>{error}</p>}
       {imageUrl && (
@@ -88,6 +113,11 @@ const DisplayRandomPicture = () => {
           Get Another Picture
         </Button>
       </SubmitButton>
+      <StyledRefreshButton onClick={fetchRandomPicture}>
+        <Avatar sx={{ width: 24, height: 24 }}>
+          <Autorenew />
+        </Avatar>
+      </StyledRefreshButton>
       {renderAlertBar()}
     </Stack>
   );
