@@ -1,9 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 
 'use client';
-import { Send } from '@mui/icons-material';
+import styled from '@emotion/styled';
+import { Autorenew, Send } from '@mui/icons-material';
+import { css, keyframes } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
+import { purple } from '@mui/material/colors';
 import Stack from '@mui/material/Stack';
 import React, { useEffect, useState } from 'react';
 
@@ -12,23 +15,37 @@ import { useClientContext } from '@/hooks/useClientContext';
 
 import SubmitButton from '@/components/shared/SubmitButton';
 
+import { getApiResponse } from '@/utils/shared/get-api-response';
+
 const DisplayRandomPicture = () => {
   const [imageUrl, setImageUrl] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const { fetchCount, updateClientCtx } = useClientContext();
   const { setAlertBarProps, renderAlertBar } = useAlertBar();
   const renderCountRef = React.useRef(0);
 
   const fetchRandomPicture = async () => {
+    if (loading) {
+      setAlertBarProps({
+        message: 'Please wait for the current fetch to complete',
+        severity: 'warning',
+      });
+      return;
+    }
     setLoading(true);
     setError('');
 
     try {
-      const response = await fetch('https://picsum.photos/300/150');
-      if (!response.ok) {
-        throw new Error('Error fetching the image');
+      const response = await getApiResponse<Response & { url: string }>({
+        apiEndpoint: 'https://picsum.photos/300/160',
+        timeout: 5001,
+      });
+
+      if (!response?.url) {
+        throw new Error('Error fetching the image, no response url');
       }
+
       setImageUrl(response.url);
       updateClientCtx({ fetchCount: fetchCount + 1 });
       setAlertBarProps({
@@ -36,18 +53,22 @@ const DisplayRandomPicture = () => {
         severity: 'info',
       });
     } catch (error) {
-      setError('Error fetching the image');
+      const errorMsg =
+        error instanceof Error ? error.message : 'Error fetching the image';
+
+      setError(errorMsg);
       setAlertBarProps({
-        message: 'Error fetching the image',
+        message: errorMsg,
         severity: 'error',
       });
+      setLoading(false);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    if (renderCountRef.current === 0) {
+    if (renderCountRef.current === 0 && !loading) {
       fetchRandomPicture();
     }
     renderCountRef.current += 1;
@@ -59,6 +80,7 @@ const DisplayRandomPicture = () => {
       justifyContent='center'
       alignItems='center'
       spacing={2}
+      sx={{ position: 'relative', width: '300px', margin: '0 auto' }}
     >
       {error && <p>{error}</p>}
       {imageUrl && (
@@ -71,7 +93,7 @@ const DisplayRandomPicture = () => {
       )}
       <div>
         {loading && <span>Loading...</span>} Component Render Count:{' '}
-        {renderCountRef.current}
+        {renderCountRef.current + 1}
       </div>
 
       <SubmitButton
@@ -88,9 +110,54 @@ const DisplayRandomPicture = () => {
           Get Another Picture
         </Button>
       </SubmitButton>
+      {imageUrl && (
+        <StyledRefreshButton onClick={fetchRandomPicture} loading={loading}>
+          <Avatar sx={{ width: 24, height: 24 }}>
+            <Autorenew />
+          </Avatar>
+        </StyledRefreshButton>
+      )}
       {renderAlertBar()}
     </Stack>
   );
 };
+
+const spin = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+const StyledRefreshButton = styled.div<{ loading?: boolean }>`
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0.5rem !important;
+  pointer-events: ${({ loading }) => (loading ? 'none' : 'auto')};
+  opacity: ${({ loading }) => (loading ? '0.6' : '1')};
+  cursor: ${({ loading }) => (loading ? 'not-allowed' : 'pointer')};
+  svg {
+    width: 20px;
+    height: 20px;
+    animation: ${({ loading }) =>
+      loading
+        ? css`
+            ${spin} 2s linear infinite
+          `
+        : 'none'};
+  }
+  :hover {
+    svg {
+      path {
+        fill: ${purple[500]};
+      }
+    }
+    .MuiAvatar-circular {
+      background-color: ${purple[50]};
+    }
+  }
+`;
 
 export default DisplayRandomPicture;

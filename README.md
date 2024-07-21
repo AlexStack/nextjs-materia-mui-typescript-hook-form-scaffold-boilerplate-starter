@@ -14,7 +14,7 @@ If you prefer Tailwind css, check this: [Tailwind-CSS-Version](https://github.co
 
 ## Demo
 
-[<img src="./public/images/cover.png">](https://mui-nextjs-ts.vercel.app)
+[<img src="https://alexstack.github.io/reactStarter/asset/NextJs14-mui5.gif">](https://mui-nextjs-ts.vercel.app)
 
 🚘🚘🚘 [**Click here to see an online demo**](https://mui-nextjs-ts.vercel.app) 🚘🚘🚘
 

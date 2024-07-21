@@ -14,10 +14,12 @@ const loadDataFromApi = async (slug?: string) => {
     getApiResponse<NpmData>({
       apiEndpoint: 'https://registry.npmjs.org/react/latest',
       revalidate: 60 * 60 * 24, // 24 hours cache
+      timeout: 5000, // 5 seconds
     }),
     getApiResponse<NpmData>({
       apiEndpoint: 'https://registry.npmjs.org/next/latest',
       revalidate: 0, // no cache
+      timeout: 5000, // 5 seconds
     }),
   ]);
 
