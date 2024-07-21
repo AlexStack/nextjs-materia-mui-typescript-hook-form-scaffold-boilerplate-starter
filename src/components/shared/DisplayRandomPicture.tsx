@@ -15,13 +15,14 @@ import { useClientContext } from '@/hooks/useClientContext';
 
 import SubmitButton from '@/components/shared/SubmitButton';
 
+import { FetchApiContext } from '@/constants';
 import { getApiResponse } from '@/utils/shared/get-api-response';
 
 const DisplayRandomPicture = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const { fetchCount, updateClientCtx } = useClientContext();
+  const { fetchCount, updateClientCtx } = useClientContext<FetchApiContext>();
   const { setAlertBarProps, renderAlertBar } = useAlertBar();
   const renderCountRef = React.useRef(0);
 
@@ -92,7 +93,7 @@ const DisplayRandomPicture = () => {
         />
       )}
       <div>
-        {loading && <span>Loading...</span>} Component Render Count:{' '}
+        {loading ? <span>Loading...</span> : null} Component Render Count:{' '}
         {renderCountRef.current + 1}
       </div>
 

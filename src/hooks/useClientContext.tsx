@@ -1,52 +1,68 @@
 'use client';
 
-import React, { ReactNode, useCallback, useState } from 'react';
+import React, {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useState,
+} from 'react';
 
-export interface ClientContextData {
-  topError: ReactNode;
-  fetchCount: number;
-  updateClientCtx: (props: Partial<ClientContextData>) => void;
+/**
+ * This is a generic custom hook for updating the client context
+ * It can be used in multiple places from any client-side component
+ * Please change the per-defined type & default value in constants/context.ts
+ */
+
+export const OUTSIDE_CLIENT_PROVIDER_ERROR =
+  'Cannot be used outside ClientProvider!';
+export interface UpdateClientCtxType<T> {
+  updateClientCtx: (props: Partial<T>) => void;
 }
 
-const CLIENT_CTX_VALUE: ClientContextData = {
-  topError: null,
-  fetchCount: 0,
+const UPDATE_CLIENT_CTX = {
   updateClientCtx: () => {
-    // console.error('Cannot be used outside ClientProvider');
-    throw new Error('Cannot be used outside ClientProvider');
+    throw new Error(OUTSIDE_CLIENT_PROVIDER_ERROR);
   },
 };
 
-/**
- * You should change the above interface and default value as per your requirement
- * No need to change the below code
- * Client-side component usage example:
- * const clientContext = useClientContext();
- * clientContext.updateClientCtx({ topError: 'Error message' });
- * clientContext.updateClientCtx({ totalRenderCount: 10 });
- * The total render count is: clientContext.totalRenderCount
- */
-export const ClientContext =
-  React.createContext<ClientContextData>(CLIENT_CTX_VALUE);
+export const ClientContext = createContext<unknown | undefined>(undefined);
 
-export const useClientContext = (): ClientContextData => {
-  const context = React.useContext(ClientContext);
-  if (!context) throw new Error('Cannot be used outside ClientProvider');
+export const useClientContext = <T,>(): T & UpdateClientCtxType<T> => {
+  const context = useContext(ClientContext);
+  if (context === undefined) {
+    throw new Error(OUTSIDE_CLIENT_PROVIDER_ERROR);
+  }
 
-  return context;
+  return context as T & UpdateClientCtxType<T>;
 };
 
-export const ClientProvider = ({
+/**
+ * You should pass the default value to the ClientProvider first
+ * e.g. <ClientProvider defaultValue={FETCH_API_CTX_VALUE} value={dynamicValue}>
+ * Client-side component usage example:
+ * const clientContext = useClientContext<FetchApiContext>();
+ * clientContext.updateClientCtx({ topError: 'Error message' });
+ * clientContext.updateClientCtx({ fetchCount: 10 });
+ * The total fetch count is: clientContext.fetchCount
+ */
+export const ClientProvider = <T,>({
   children,
-  value = CLIENT_CTX_VALUE,
+  value,
+  defaultValue,
 }: {
   children: ReactNode;
-  value?: Partial<ClientContextData>;
+  value?: Partial<T>;
+  defaultValue: T;
 }) => {
-  const [contextValue, setContextValue] = useState(value);
+  const [contextValue, setContextValue] = useState({
+    ...defaultValue,
+    ...value,
+    ...UPDATE_CLIENT_CTX,
+  });
 
   const updateContext = useCallback(
-    (newCtxValue: Partial<ClientContextData>) => {
+    (newCtxValue: Partial<T>) => {
       setContextValue((prevContextValue) => ({
         ...prevContextValue,
         ...newCtxValue,
@@ -58,7 +74,6 @@ export const ClientProvider = ({
   return (
     <ClientContext.Provider
       value={{
-        ...CLIENT_CTX_VALUE,
         ...contextValue,
         updateClientCtx: updateContext,
       }}
