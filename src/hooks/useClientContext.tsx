@@ -16,15 +16,10 @@ import React, {
 
 export const OUTSIDE_CLIENT_PROVIDER_ERROR =
   'Cannot be used outside ClientProvider!';
+
 export interface UpdateClientCtxType<T> {
   updateClientCtx: (props: Partial<T>) => void;
 }
-
-const UPDATE_CLIENT_CTX = {
-  updateClientCtx: () => {
-    throw new Error(OUTSIDE_CLIENT_PROVIDER_ERROR);
-  },
-};
 
 export const ClientContext = createContext<unknown | undefined>(undefined);
 
@@ -58,7 +53,9 @@ export const ClientProvider = <T,>({
   const [contextValue, setContextValue] = useState({
     ...defaultValue,
     ...value,
-    ...UPDATE_CLIENT_CTX,
+    updateClientCtx: (_: Partial<T>): void => {
+      throw new Error(OUTSIDE_CLIENT_PROVIDER_ERROR);
+    },
   });
 
   const updateContext = useCallback(
