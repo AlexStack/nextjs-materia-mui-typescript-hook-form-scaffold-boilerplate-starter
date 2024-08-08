@@ -18,6 +18,13 @@ If you prefer Tailwind css, check this: [Tailwind-CSS-Version](https://github.co
 
 🚘🚘🚘 [**Click here to see an online demo**](https://mui-nextjs-ts.vercel.app) 🚘🚘🚘
 
+## Clone this repository for React 19.x with NextJs 15.x or React 18.x with NextJs 14.x
+
+- Clone React19-Next15-MUI6-TS-Starter:
+  - `git clone -b react19-nextjs15 https://github.com/AlexStack/nextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter.git react19-nextjs15-mui6-ts-starter`
+- Clone React18-Next14-MUI5-TS-Starter:
+  - `git clone -b nextjs14 https://github.com/AlexStack/nextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter.git react18-nextjs14-mui5-ts-starter`
+
 ## Features
 
 This repository is 🔋 battery packed with:
