@@ -8,7 +8,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import { purple } from '@mui/material/colors';
 import Stack from '@mui/material/Stack';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useTransition } from 'react';
 
 import { useAlertBar } from '@/hooks/useAlertBar';
 import { useClientContext } from '@/hooks/useClientContext';
@@ -19,56 +19,56 @@ import { getApiResponse } from '@/utils/shared/get-api-response';
 
 const DisplayRandomPicture = () => {
   const [imageUrl, setImageUrl] = useState('');
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const { fetchCount, updateClientCtx } = useClientContext();
   const { setAlertBarProps, renderAlertBar } = useAlertBar();
   const renderCountRef = React.useRef(0);
+  const [isPending, startTransition] = useTransition();
 
   const fetchRandomPicture = async () => {
-    if (loading) {
-      setAlertBarProps({
-        message: 'Please wait for the current fetch to complete',
-        severity: 'warning',
-      });
-      return;
-    }
-    setLoading(true);
-    setError('');
-
-    try {
-      const response = await getApiResponse<Response & { url: string }>({
-        apiEndpoint: 'https://picsum.photos/300/160',
-        timeout: 5001,
-      });
-
-      if (!response?.url) {
-        throw new Error('Error fetching the image, no response url');
+    startTransition(async () => {
+      if (isPending) {
+        setAlertBarProps({
+          message: 'Please wait for the current fetch to complete',
+          severity: 'warning',
+        });
+        return;
       }
+      setError('');
 
-      setImageUrl(response.url);
-      updateClientCtx({ fetchCount: fetchCount + 1 });
-      setAlertBarProps({
-        message: 'A random picture fetched successfully',
-        severity: 'info',
-      });
-    } catch (error) {
-      const errorMsg =
-        error instanceof Error ? error.message : 'Error fetching the image';
+      try {
+        const response = await getApiResponse<Response & { url: string }>({
+          apiEndpoint: 'https://picsum.photos/300/160',
+          timeout: 5001,
+        });
 
-      setError(errorMsg);
-      setAlertBarProps({
-        message: errorMsg,
-        severity: 'error',
-      });
-      setLoading(false);
-    } finally {
-      setLoading(false);
-    }
+        if (!response?.url) {
+          throw new Error('Error fetching the image, no response url');
+        }
+
+        setImageUrl(response.url);
+        updateClientCtx({ fetchCount: fetchCount + 1 });
+        setAlertBarProps({
+          message: 'A random picture fetched successfully',
+          severity: 'info',
+        });
+      } catch (error) {
+        const errorMsg =
+          error instanceof Error ? error.message : 'Error fetching the image';
+
+        setError(errorMsg);
+        setAlertBarProps({
+          message: errorMsg,
+          severity: 'error',
+        });
+      } finally {
+        // setLoading(false);
+      }
+    });
   };
 
   useEffect(() => {
-    if (renderCountRef.current === 0 && !loading) {
+    if (renderCountRef.current === 0 && !isPending) {
       fetchRandomPicture();
     }
     renderCountRef.current += 1;
@@ -82,7 +82,6 @@ const DisplayRandomPicture = () => {
       spacing={2}
       sx={{ position: 'relative', width: '300px', margin: '0 auto' }}
     >
-      {error && <p>{error}</p>}
       {imageUrl && (
         <Avatar
           alt='DisplayRandomPicture'
@@ -91,27 +90,31 @@ const DisplayRandomPicture = () => {
           sx={{ width: 300, height: 150, borderRadius: '10px' }}
         />
       )}
+      {error && <p>{error}</p>}
       <div>
-        {loading && <span>Loading...</span>} Component Render Count:{' '}
+        {isPending && <span>Loading...</span>} Component Render Count:{' '}
         {renderCountRef.current + 1}
       </div>
 
       <SubmitButton
-        isSubmitting={loading}
+        isSubmitting={isPending}
         submittingText='Fetching Picture ...'
       >
         <Button
           variant='contained'
           endIcon={<Send />}
           onClick={fetchRandomPicture}
-          disabled={loading}
+          disabled={isPending}
           color='secondary'
         >
           Get Another Picture
         </Button>
       </SubmitButton>
       {imageUrl && (
-        <StyledRefreshButton onClick={fetchRandomPicture} loading={loading}>
+        <StyledRefreshButton
+          onClick={fetchRandomPicture}
+          loading={isPending ? 1 : 0}
+        >
           <Avatar sx={{ width: 24, height: 24 }}>
             <Autorenew />
           </Avatar>
@@ -130,7 +133,7 @@ const spin = keyframes`
     transform: rotate(360deg);
   }
 `;
-const StyledRefreshButton = styled.div<{ loading?: boolean }>`
+const StyledRefreshButton = styled.div<{ loading: number }>`
   position: absolute;
   right: 0;
   top: 0;

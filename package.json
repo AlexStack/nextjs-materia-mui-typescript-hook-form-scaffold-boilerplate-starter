@@ -1,6 +1,6 @@
 {
-  "name": "nextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter",
-  "version": "0.1.0",
+  "name": "react19-nextjs15-materia-mui6-typescript-hook-form-scaffold-boilerplate-starter",
+  "version": "2.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -24,9 +24,9 @@
     "@mui/icons-material": "^5.14.9",
     "@mui/material": "^5.14.10",
     "dayjs": "^1.11.10",
-    "next": "^14.0.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "next": "^15.0.0-rc.0",
+    "react": "^19.0.0-rc-512b09b2-20240718",
+    "react-dom": "^19.0.0-rc-512b09b2-20240718",
     "react-hook-form": "^7.46.2",
     "react-icons": "^4.10.1",
     "zod": "^3.22.4"
@@ -42,7 +42,7 @@
     "@typescript-eslint/parser": "^5.62.0",
     "autoprefixer": "^10.4.14",
     "eslint": "^8.45.0",
-    "eslint-config-next": "^14.0.1",
+    "eslint-config-next": "^15.0.0-rc.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",

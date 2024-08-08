@@ -6,6 +6,7 @@ import { ClientProvider } from '@/hooks/useClientContext';
 
 import DisplayRandomPicture from '@/components/shared/DisplayRandomPicture';
 import PageFooter from '@/components/shared/PageFooter';
+import ReactActionForm from '@/components/shared/ReactActionForm';
 import ReactHookForm from '@/components/shared/ReactHookForm';
 
 import { SITE_CONFIG } from '@/constants';
@@ -67,6 +68,7 @@ export default function Homepage({
               component)
             </h4>
             <ClientProvider>
+              <ReactActionForm />
               <ReactHookForm />
               <DisplayRandomPicture />
             </ClientProvider>
