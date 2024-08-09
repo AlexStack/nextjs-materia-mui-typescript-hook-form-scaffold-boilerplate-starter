@@ -12,12 +12,12 @@ const loadDataFromApi = async (slug?: string) => {
   // Fetch & cache data from 2 remote APIs test
   const [reactNpmData, nextJsNpmData] = await Promise.all([
     getApiResponse<NpmData>({
-      apiEndpoint: 'https://registry.npmjs.org/react/latest',
+      apiEndpoint: 'https://registry.npmjs.org/react/rc',
       revalidate: 60 * 60 * 24, // 24 hours cache
       timeout: 5000, // 5 seconds
     }),
     getApiResponse<NpmData>({
-      apiEndpoint: 'https://registry.npmjs.org/next/latest',
+      apiEndpoint: 'https://registry.npmjs.org/next/rc',
       revalidate: 0, // no cache
       timeout: 5000, // 5 seconds
     }),
