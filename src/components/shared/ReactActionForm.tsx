@@ -19,6 +19,7 @@ import { useClientContext } from '@/hooks/useClientContext';
 
 import SubmitButton from '@/components/shared/SubmitButton';
 
+import { FetchApiContext } from '@/constants';
 import { consoleLog } from '@/utils/shared/console-log';
 import { getApiResponse } from '@/utils/shared/get-api-response';
 
@@ -52,7 +53,7 @@ const ReactActionForm: React.FC = () => {
 
   const { setAlertBarProps, renderAlertBar } = useAlertBar();
 
-  const { fetchCount, updateClientCtx } = useClientContext();
+  const { fetchCount, updateClientCtx } = useClientContext<FetchApiContext>();
   const [formErrors, setFormErrors] = React.useState<Record<string, string>>(
     {}
   );
