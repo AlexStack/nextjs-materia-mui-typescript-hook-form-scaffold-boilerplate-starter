@@ -1,10 +1,10 @@
-# NextJs 14.x + MUI 5.x + React Hook Form + TypeScript Starter and Boilerplate
+# ReactJs 19.x + NextJs 15.x + MUI 6.x + TypeScript Starter and Boilerplate
 
 <div align="center">
-  <h2>2024/2025: 🔋 NextJs 14.x + MUI 5.x + TypeScript Starter</h2>
-  <p>The scaffold for NextJs 14.x (App Router), React Hook Form, Material UI(MUI 5.x),Typescript and ESLint, and TypeScript with Absolute Import, Seo, Link component, pre-configured with Husky.</p>
+  <h2>2024/2025: 🔋 ReactJs 19.x + NextJs 15.x + MUI 6.x + TypeScript Starter</h2>
+  <p>The scaffold for NextJs 15.x (App Router), React Hook Form, Material UI(MUI 6.x),Typescript and ESLint, and TypeScript with Absolute Import, Seo, Link component, pre-configured with Husky.</p>
 
-  <p>With simple example of NextJs API, React-hook-form with zod, fetch remote api, 404/500 error pages, MUI SSR usage, Styled component, MUI AlertBar, MUI confirmation dialog, Loading button, Client-side component & React Context update hook</p>
+  <p>With simple example of ReactJs 19.x, NextJs 15.x API, React-hook-form with zod, fetch remote api, 404/500 error pages, MUI SSR usage, Styled component, MUI AlertBar, MUI confirmation dialog, Loading button, Client-side component & React Context update hook</p>
 
 🚘🚘🚘 [**Click here to see an online demo**](https://mui-nextjs-ts.vercel.app) 🚘🚘🚘
 
@@ -18,12 +18,19 @@ If you prefer Tailwind css, check this: [Tailwind-CSS-Version](https://github.co
 
 🚘🚘🚘 [**Click here to see an online demo**](https://mui-nextjs-ts.vercel.app) 🚘🚘🚘
 
+## Clone this repository for React 19.x with NextJs 15.x or React 18.x with NextJs 14.x
+
+- Clone React19-Next15-MUI6-TS-Starter:
+  - `git clone -b react19-nextjs15 https://github.com/AlexStack/nextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter.git react19-nextjs15-mui6-ts-starter`
+- Clone React18-Next14-MUI5-TS-Starter:
+  - `git clone -b nextjs14 https://github.com/AlexStack/nextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter.git react18-nextjs14-mui5-ts-starter`
+
 ## Features
 
 This repository is 🔋 battery packed with:
 
-- ⚡️ Next.js 14.x with App Router
-- ⚛️ React 18.x
+- ⚡️ Next.js 15.x with App Router
+- ⚛️ React 19.x
 - ✨ TypeScript
 - 💨 Material UI — Ready to use Material Design components [check here for the usage](https://mui.com/material-ui/getting-started/usage/)
 - 🎨 React Hook Form — Performant, flexible and extensible forms with easy-to-use validation

@@ -1,4 +1,4 @@
-import PinDropIcon from '@mui/icons-material/PinDrop';
+import AutoAwesome from '@mui/icons-material/AutoAwesome';
 import { Box, Typography } from '@mui/material';
 import Link from 'next/link';
 
@@ -6,6 +6,7 @@ import { ClientProvider } from '@/hooks/useClientContext';
 
 import DisplayRandomPicture from '@/components/shared/DisplayRandomPicture';
 import PageFooter from '@/components/shared/PageFooter';
+import ReactActionForm from '@/components/shared/ReactActionForm';
 import ReactHookForm from '@/components/shared/ReactHookForm';
 
 import { FETCH_API_CTX_VALUE, SITE_CONFIG } from '@/constants';
@@ -18,7 +19,7 @@ export default function Homepage({
     <main>
       <section>
         <Box sx={{ textAlign: 'center' }}>
-          <PinDropIcon
+          <AutoAwesome
             className='page-title'
             sx={{ width: '3rem', height: '3rem' }}
           />
@@ -44,8 +45,8 @@ export default function Homepage({
             sx={{ color: 'green', mt: 3 }}
           >
             Fetch & cache data from 2 remote APIs test: <br />
-            The latest React version is {reactVersion}, and the latest NextJs
-            version is {nextJsVersion}
+            The React RC version is {reactVersion}, and the NextJs RC version is{' '}
+            {nextJsVersion}
             <Box sx={{ color: 'grey', fontSize: 10 }}>
               On dev environment, you can see how long it takes on console, e.g.
               getApiResponse: 0.05s
@@ -67,6 +68,7 @@ export default function Homepage({
               component)
             </h4>
             <ClientProvider defaultValue={FETCH_API_CTX_VALUE}>
+              <ReactActionForm />
               <ReactHookForm />
               <DisplayRandomPicture />
             </ClientProvider>

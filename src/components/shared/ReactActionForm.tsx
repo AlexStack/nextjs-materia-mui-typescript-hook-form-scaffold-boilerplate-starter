@@ -1,8 +1,7 @@
 'use client';
 
 import styled from '@emotion/styled';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { NextPlan, Save } from '@mui/icons-material';
+import { Save } from '@mui/icons-material';
 import {
   Avatar,
   Box,
@@ -12,13 +11,11 @@ import {
   TextField,
 } from '@mui/material';
 import { purple } from '@mui/material/colors';
-import React, { useEffect } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
-import { z } from 'zod';
+import React, { useActionState, useOptimistic } from 'react';
+import { z, ZodError } from 'zod';
 
 import { useAlertBar } from '@/hooks/useAlertBar';
 import { useClientContext } from '@/hooks/useClientContext';
-import useConfirmationDialog from '@/hooks/useConfirmDialog';
 
 import SubmitButton from '@/components/shared/SubmitButton';
 
@@ -47,40 +44,62 @@ const StyledForm = styled.form`
 
 type FormValues = z.infer<typeof zodSchema>;
 
-const ReactHookForm: React.FC = () => {
+const ReactActionForm: React.FC = () => {
   const apiEndpoint = '/api/test';
   const [apiResult, setApiResult] = React.useState<FormValues>();
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [optimisticApiResult, setOptimisticApiResult] = useOptimistic<
+    FormValues | undefined
+  >(undefined);
 
   const { setAlertBarProps, renderAlertBar } = useAlertBar();
 
-  const { openConfirmDialog, renderConfirmationDialog } =
-    useConfirmationDialog();
-
-  const {
-    handleSubmit,
-    control,
-    formState: { errors, isValid },
-    setValue,
-  } = useForm<FormValues>({
-    resolver: zodResolver(zodSchema),
-  });
-
   const { fetchCount, updateClientCtx } = useClientContext<FetchApiContext>();
+  const [formErrors, setFormErrors] = React.useState<Record<string, string>>(
+    {}
+  );
 
-  const onSubmit: SubmitHandler<FormValues> = async (data) => {
+  const resolveZodError = (error: ZodError): Record<string, string> => {
+    const errors: Record<string, string> = {};
+    error.errors.forEach((err) => {
+      if (err.path && err.path.length > 0) {
+        const field = err.path[0];
+        errors[field as string] = err.message;
+      }
+    });
+    return errors;
+  };
+
+  const submitFormFn = async (
+    previousState: FormValues | undefined,
+    formData: FormData
+  ) => {
+    const formFieldValues = Object.fromEntries(formData) as FormValues;
+
     try {
-      setIsSubmitting(true);
+      const zodResult = zodSchema.safeParse(formFieldValues);
+      if (!zodResult.success) {
+        if (zodResult.error instanceof ZodError) {
+          const newErrors = resolveZodError(zodResult.error);
+          setFormErrors(newErrors);
+        }
+        setAlertBarProps({
+          message: 'Please fix the form errors',
+          severity: 'warning',
+          autoHideSeconds: 4,
+        });
+        throw new Error('Invalid zodSchema form data');
+      }
+      setOptimisticApiResult(formFieldValues);
+      setFormErrors({});
       const result = await getApiResponse<{
         reqData: FormValues;
       }>({
         apiEndpoint,
         method: 'POST',
-        requestData: JSON.stringify(data),
+        requestData: JSON.stringify(Object.fromEntries(formData)),
       });
       setApiResult(result?.reqData);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setIsSubmitting(false);
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
       setAlertBarProps({
         message: 'Form submitted successfully',
@@ -88,70 +107,72 @@ const ReactHookForm: React.FC = () => {
       });
       updateClientCtx({ fetchCount: fetchCount + 1 });
     } catch (error) {
-      consoleLog('handleSubmit ERROR', error);
-      setIsSubmitting(false);
+      consoleLog('submitFormFn ERROR', error, formData);
       setAlertBarProps({
         message: 'Form submission failed',
         severity: 'error',
       });
     }
+
+    return formFieldValues;
   };
 
-  useEffect(() => {
-    if (!isValid && Object.keys(errors).length > 0) {
-      setAlertBarProps({
-        message: 'Please fix the form errors',
-        severity: 'warning',
-        autoHideSeconds: 4,
-      });
+  const [actionState, submitAction, isSubmitting] = useActionState(
+    submitFormFn,
+    {
+      name: 'John Doe',
+      email: 'john@react19.org',
     }
-  }, [isValid, errors, setAlertBarProps]);
+  );
 
   return (
-    <StyledForm onSubmit={handleSubmit(onSubmit)}>
+    <StyledForm action={submitAction}>
       <Box sx={{ m: 2 }}>
-        <Controller
+        <TextField
+          label='Name'
           name='name'
-          control={control}
-          defaultValue=''
-          render={({ field }) => (
-            <TextField label='Name' {...field} size='small' />
-          )}
+          size='small'
+          defaultValue={actionState?.name || ''}
         />
-        {errors.name && (
+        {!isSubmitting && formErrors.name && (
           <FormHelperText sx={{ textAlign: 'center' }}>
-            {errors.name.message}
+            {formErrors.name}
           </FormHelperText>
         )}
       </Box>
 
       <Box sx={{ m: 2 }}>
-        <Controller
+        <TextField
+          label='Email'
           name='email'
-          control={control}
-          defaultValue=''
-          render={({ field }) => (
-            <TextField label='Email' {...field} size='small' />
-          )}
+          size='small'
+          defaultValue={actionState?.email || ''}
         />
-        {errors.email && (
+        {!isSubmitting && formErrors.email && (
           <FormHelperText sx={{ textAlign: 'center' }}>
-            {errors.email.message}
+            {formErrors.email}
           </FormHelperText>
         )}
       </Box>
+      {optimisticApiResult && (
+        <Box sx={{ m: 2, color: 'gray' }}>
+          React19 useOptimistic() API result: {optimisticApiResult.name} &{' '}
+          {optimisticApiResult.email}
+        </Box>
+      )}
       {apiResult && !isSubmitting && (
         <Box sx={{ m: 2, color: 'green' }}>
-          API result from {apiEndpoint}: {apiResult.name} & {apiResult.email}
+          React19 action-form API result from {apiEndpoint}: {apiResult.name} &{' '}
+          {apiResult.email}
         </Box>
       )}
 
       <SubmitButton
         isSubmitting={isSubmitting}
-        submittingText='Fetching API ...'
+        submittingText='Submitting, mock wait 5 seconds ...'
       >
         <Button variant='contained' type='submit' startIcon={<Save />}>
-          Test react hook form with zod
+          Test react19 form action
         </Button>
       </SubmitButton>
 
@@ -176,31 +197,11 @@ const ReactHookForm: React.FC = () => {
             {fetchCount}
           </Avatar>
         </Stack>
-        <Button
-          variant='outlined'
-          onClick={() => {
-            const randomNumber = Math.floor(Math.random() * 90) + 10;
-            openConfirmDialog({
-              title: 'Change form name',
-              content: `Are you sure to change above form name to Alex ${randomNumber} and submit?`,
-              onConfirm: () => {
-                setValue('name', `Alex ${randomNumber}`);
-                setValue('email', 'alex@test.com');
-                handleSubmit(onSubmit)();
-              },
-            });
-          }}
-          endIcon={<NextPlan />}
-        >
-          Test MUI confirmation dialog
-        </Button>
       </Box>
 
       {renderAlertBar()}
-
-      {renderConfirmationDialog()}
     </StyledForm>
   );
 };
 
-export default ReactHookForm;
+export default ReactActionForm;
