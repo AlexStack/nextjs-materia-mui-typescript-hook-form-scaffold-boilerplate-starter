@@ -15,12 +15,13 @@ import { useClientContext } from '@/hooks/useClientContext';
 
 import SubmitButton from '@/components/shared/SubmitButton';
 
+import { FetchApiContext } from '@/constants';
 import { getApiResponse } from '@/utils/shared/get-api-response';
 
 const DisplayRandomPicture = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [error, setError] = useState('');
-  const { fetchCount, updateClientCtx } = useClientContext();
+  const { fetchCount, updateClientCtx } = useClientContext<FetchApiContext>();
   const { setAlertBarProps, renderAlertBar } = useAlertBar();
   const renderCountRef = React.useRef(0);
   const [isPending, startTransition] = useTransition();

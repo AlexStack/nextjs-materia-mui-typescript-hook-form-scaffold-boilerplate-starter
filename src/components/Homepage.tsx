@@ -9,7 +9,7 @@ import PageFooter from '@/components/shared/PageFooter';
 import ReactActionForm from '@/components/shared/ReactActionForm';
 import ReactHookForm from '@/components/shared/ReactHookForm';
 
-import { SITE_CONFIG } from '@/constants';
+import { FETCH_API_CTX_VALUE, SITE_CONFIG } from '@/constants';
 
 export default function Homepage({
   reactVersion = 'unknown',
@@ -67,7 +67,7 @@ export default function Homepage({
               Test local NextJs API /api/test POST method (client-side
               component)
             </h4>
-            <ClientProvider>
+            <ClientProvider defaultValue={FETCH_API_CTX_VALUE}>
               <ReactActionForm />
               <ReactHookForm />
               <DisplayRandomPicture />

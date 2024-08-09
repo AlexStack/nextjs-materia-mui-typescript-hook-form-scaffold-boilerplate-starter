@@ -22,6 +22,7 @@ import useConfirmationDialog from '@/hooks/useConfirmDialog';
 
 import SubmitButton from '@/components/shared/SubmitButton';
 
+import { FetchApiContext } from '@/constants';
 import { consoleLog } from '@/utils/shared/console-log';
 import { getApiResponse } from '@/utils/shared/get-api-response';
 
@@ -65,7 +66,7 @@ const ReactHookForm: React.FC = () => {
     resolver: zodResolver(zodSchema),
   });
 
-  const { fetchCount, updateClientCtx } = useClientContext();
+  const { fetchCount, updateClientCtx } = useClientContext<FetchApiContext>();
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
