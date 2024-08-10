@@ -10,8 +10,8 @@ import { purple } from '@mui/material/colors';
 import Stack from '@mui/material/Stack';
 import React, { useEffect, useState, useTransition } from 'react';
 
-import { useAlertBar } from '@/hooks/useAlertBar';
 import { useClientContext } from '@/hooks/useClientContext';
+import { useSharedUtilContext } from '@/hooks/useSharedUtilContext';
 
 import SubmitButton from '@/components/shared/SubmitButton';
 
@@ -22,7 +22,7 @@ const DisplayRandomPicture = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [error, setError] = useState('');
   const { fetchCount, updateClientCtx } = useClientContext<FetchApiContext>();
-  const { setAlertBarProps, renderAlertBar } = useAlertBar();
+  const { setAlertBarProps } = useSharedUtilContext();
   const renderCountRef = React.useRef(0);
   const [isPending, startTransition] = useTransition();
 
@@ -121,7 +121,6 @@ const DisplayRandomPicture = () => {
           </Avatar>
         </StyledRefreshButton>
       )}
-      {renderAlertBar()}
     </Stack>
   );
 };

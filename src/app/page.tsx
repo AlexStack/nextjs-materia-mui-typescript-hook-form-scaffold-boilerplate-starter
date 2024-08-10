@@ -6,7 +6,7 @@ import { NpmData, PageParams } from '@/types';
 
 const loadDataFromApi = async (slug?: string) => {
   if (slug === 'testError500') {
-    throw new Error('This is mock a ssr 500 test error');
+    throw new Error('This is mock a SSR 500 test error');
   }
 
   // Fetch & cache data from 2 remote APIs test

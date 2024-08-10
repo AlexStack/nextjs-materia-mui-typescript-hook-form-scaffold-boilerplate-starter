@@ -14,8 +14,8 @@ import { purple } from '@mui/material/colors';
 import React, { useActionState, useOptimistic } from 'react';
 import { z, ZodError } from 'zod';
 
-import { useAlertBar } from '@/hooks/useAlertBar';
 import { useClientContext } from '@/hooks/useClientContext';
+import { useSharedUtilContext } from '@/hooks/useSharedUtilContext';
 
 import SubmitButton from '@/components/shared/SubmitButton';
 
@@ -51,7 +51,7 @@ const ReactActionForm: React.FC = () => {
     FormValues | undefined
   >(undefined);
 
-  const { setAlertBarProps, renderAlertBar } = useAlertBar();
+  const { setAlertBarProps } = useSharedUtilContext();
 
   const { fetchCount, updateClientCtx } = useClientContext<FetchApiContext>();
   const [formErrors, setFormErrors] = React.useState<Record<string, string>>(
@@ -184,7 +184,7 @@ const ReactActionForm: React.FC = () => {
           justifyContent='center'
           alignItems='center'
         >
-          <div>Total fetch count from React Context:</div>
+          <div>Total fetch count from ReactActionForm.tsx:</div>
           <Avatar
             sx={{
               bgcolor: purple[500],
@@ -198,8 +198,6 @@ const ReactActionForm: React.FC = () => {
           </Avatar>
         </Stack>
       </Box>
-
-      {renderAlertBar()}
     </StyledForm>
   );
 };

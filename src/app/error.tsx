@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client'; // Error components must be Client Components
 
 import WarningIcon from '@mui/icons-material/Warning';
@@ -29,6 +30,12 @@ export default function Error({
             <Button onClick={reset}>Try again</Button>
           </Box>
           <a href='/?slug=homepage'>Back to home</a>
+          <div>
+            <img
+              src='https://img.freepik.com/free-vector/500-internal-server-error-concept-illustration_114360-1905.jpg'
+              alt='500'
+            />
+          </div>
         </Box>
       </section>
     </main>

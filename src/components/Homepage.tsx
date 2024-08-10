@@ -2,12 +2,12 @@ import AutoAwesome from '@mui/icons-material/AutoAwesome';
 import { Box, Typography } from '@mui/material';
 import Link from 'next/link';
 
-import { ClientProvider } from '@/hooks/useClientContext';
-
-import DisplayRandomPicture from '@/components/shared/DisplayRandomPicture';
-import PageFooter from '@/components/shared/PageFooter';
-import ReactActionForm from '@/components/shared/ReactActionForm';
-import ReactHookForm from '@/components/shared/ReactHookForm';
+import BottomLinks from '@/components/homepage/BottomLinks';
+import DisplayRandomPicture from '@/components/homepage/DisplayRandomPicture';
+import PageFooter from '@/components/homepage/PageFooter';
+import ReactActionForm from '@/components/homepage/ReactActionForm';
+import ReactHookForm from '@/components/homepage/ReactHookForm';
+import ClientSideWrapper from '@/components/shared/ClientSideWrapper';
 
 import { FETCH_API_CTX_VALUE, SITE_CONFIG } from '@/constants';
 
@@ -67,39 +67,12 @@ export default function Homepage({
               Test local NextJs API /api/test POST method (client-side
               component)
             </h4>
-            <ClientProvider defaultValue={FETCH_API_CTX_VALUE}>
+            <ClientSideWrapper defaultContextValue={FETCH_API_CTX_VALUE}>
               <ReactActionForm />
               <ReactHookForm />
               <DisplayRandomPicture />
-            </ClientProvider>
-          </Box>
-
-          <Box sx={{ m: 5 }}>
-            <Link
-              href='https://github.com/AlexStack/nextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter'
-              target='_blank'
-            >
-              See the Github repository page
-            </Link>
-          </Box>
-          <Box sx={{ m: 5, a: { color: 'red' } }}>
-            <Link
-              href='https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2FAlexStack%2Fnextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter&showOptionalTeamCreation=false'
-              target='_blank'
-            >
-              Click here to deploy a demo site to your Vercel in 1 minute
-            </Link>
-          </Box>
-
-          <Box sx={{ m: 5 }}>
-            <Link href='/test-page-not-exists'>
-              Test 404 page not found (mock file not exists)
-            </Link>
-          </Box>
-          <Box sx={{ m: 5 }}>
-            <a href='/?slug=testError500'>
-              Test 500 error page (mock server side throw error)
-            </a>
+              <BottomLinks />
+            </ClientSideWrapper>
           </Box>
         </Box>
       </section>
