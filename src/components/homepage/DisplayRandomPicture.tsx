@@ -10,19 +10,20 @@ import { purple } from '@mui/material/colors';
 import Stack from '@mui/material/Stack';
 import React, { useEffect, useState, useTransition } from 'react';
 
-import { useAlertBar } from '@/hooks/useAlertBar';
 import { useClientContext } from '@/hooks/useClientContext';
+import { useSharedUtilContext } from '@/hooks/useSharedUtilContext';
 
 import SubmitButton from '@/components/shared/SubmitButton';
 
 import { FetchApiContext } from '@/constants';
+import { consoleLog } from '@/utils/shared/console-log';
 import { getApiResponse } from '@/utils/shared/get-api-response';
 
 const DisplayRandomPicture = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [error, setError] = useState('');
   const { fetchCount, updateClientCtx } = useClientContext<FetchApiContext>();
-  const { setAlertBarProps, renderAlertBar } = useAlertBar();
+  const { setAlertBarProps } = useSharedUtilContext();
   const renderCountRef = React.useRef(0);
   const [isPending, startTransition] = useTransition();
 
@@ -52,6 +53,9 @@ const DisplayRandomPicture = () => {
         setAlertBarProps({
           message: 'A random picture fetched successfully',
           severity: 'info',
+          onClose: () => {
+            consoleLog('Alert bar closed');
+          },
         });
       } catch (error) {
         const errorMsg =
@@ -121,7 +125,6 @@ const DisplayRandomPicture = () => {
           </Avatar>
         </StyledRefreshButton>
       )}
-      {renderAlertBar()}
     </Stack>
   );
 };

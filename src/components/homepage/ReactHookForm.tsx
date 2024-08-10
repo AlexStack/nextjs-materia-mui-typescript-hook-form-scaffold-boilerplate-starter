@@ -16,9 +16,8 @@ import React, { useEffect } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { useAlertBar } from '@/hooks/useAlertBar';
 import { useClientContext } from '@/hooks/useClientContext';
-import useConfirmationDialog from '@/hooks/useConfirmDialog';
+import { useSharedUtilContext } from '@/hooks/useSharedUtilContext';
 
 import SubmitButton from '@/components/shared/SubmitButton';
 
@@ -52,10 +51,7 @@ const ReactHookForm: React.FC = () => {
   const [apiResult, setApiResult] = React.useState<FormValues>();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
-  const { setAlertBarProps, renderAlertBar } = useAlertBar();
-
-  const { openConfirmDialog, renderConfirmationDialog } =
-    useConfirmationDialog();
+  const { setAlertBarProps, openConfirmDialog } = useSharedUtilContext();
 
   const {
     handleSubmit,
@@ -195,10 +191,6 @@ const ReactHookForm: React.FC = () => {
           Test MUI confirmation dialog
         </Button>
       </Box>
-
-      {renderAlertBar()}
-
-      {renderConfirmationDialog()}
     </StyledForm>
   );
 };

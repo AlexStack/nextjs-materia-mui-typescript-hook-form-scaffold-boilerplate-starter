@@ -35,9 +35,16 @@ const StyledContentDiv = styled.div`
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
+    padding: 0.2rem;
+    color: gray;
+    :hover {
+      color: black;
+      background: rgba(0, 0, 0, 0.1);
+    }
   }
 `;
 
+// my personal confirmation dialog, feel free to use it, examples are in ReactHookForm.tsx
 const useConfirmationDialog = () => {
   const defaultDialogProps: ConfirmationDialogProps = {
     title: '',
