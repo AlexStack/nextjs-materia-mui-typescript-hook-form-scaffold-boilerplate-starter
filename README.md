@@ -23,7 +23,7 @@ If you prefer Tailwind css, check this: [Tailwind-CSS-Version](https://github.co
 - Clone & install React19-Next15-MUI6-TS-Starter:
   - `git clone -b react19-nextjs15 https://github.com/AlexStack/nextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter.git react19-nextjs15-mui6-ts-starter && cd react19-nextjs15-mui6-ts-starter && yarn install && yarn dev -p 3005`
   - Open <http://localhost:3005>
-  - Note: React 19 is not released yet, this are some warnings in the console, please ignore them.
+  - Note: React 19 is not released yet, there are some warnings in the console, please ignore them.
 - Clone & install React18-Next14-MUI5-TS-Starter:
   - `git clone -b nextjs14 https://github.com/AlexStack/nextjs-materia-mui-typescript-hook-form-scaffold-boilerplate-starter.git react18-nextjs14-mui5-ts-starter && cd react18-nextjs14-mui5-ts-starter && yarn install && yarn dev -p 3005`
   - Open <http://localhost:3005>
