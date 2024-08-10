@@ -2,15 +2,13 @@
 
 import React, { createContext, ReactNode, useContext } from 'react';
 
-import { useAlertBar } from '@/hooks/useAlertBar';
+import { AlertBarProps, useAlertBar } from '@/hooks/useAlertBar';
 import useConfirmationDialog, {
   ConfirmationDialogProps,
 } from '@/hooks/useConfirmDialog';
 
-import { AlertBarProps } from '@/components/shared/AlertBar';
-
-export const OUTSIDE_CLIENT_PROVIDER_ERROR =
-  'Cannot be used outside ClientProvider!';
+export const OUTSIDE_SHARED_UTIL_PROVIDER_ERROR =
+  'Cannot be used outside SharedUtilProvider!';
 
 export interface SharedUtilContextType {
   setAlertBarProps: (props: AlertBarProps) => void;
@@ -24,7 +22,7 @@ export const SharedUtilContext = createContext<
 export const useSharedUtilContext = (): SharedUtilContextType => {
   const context = useContext(SharedUtilContext);
   if (context === undefined) {
-    throw new Error(OUTSIDE_CLIENT_PROVIDER_ERROR);
+    throw new Error(OUTSIDE_SHARED_UTIL_PROVIDER_ERROR);
   }
 
   return context as SharedUtilContextType;

@@ -44,6 +44,7 @@ const StyledContentDiv = styled.div`
   }
 `;
 
+// my personal confirmation dialog, feel free to use it, examples are in ReactHookForm.tsx
 const useConfirmationDialog = () => {
   const defaultDialogProps: ConfirmationDialogProps = {
     title: '',

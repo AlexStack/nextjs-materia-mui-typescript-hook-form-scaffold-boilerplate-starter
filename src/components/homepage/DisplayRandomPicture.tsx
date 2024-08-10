@@ -16,6 +16,7 @@ import { useSharedUtilContext } from '@/hooks/useSharedUtilContext';
 import SubmitButton from '@/components/shared/SubmitButton';
 
 import { FetchApiContext } from '@/constants';
+import { consoleLog } from '@/utils/shared/console-log';
 import { getApiResponse } from '@/utils/shared/get-api-response';
 
 const DisplayRandomPicture = () => {
@@ -52,6 +53,9 @@ const DisplayRandomPicture = () => {
         setAlertBarProps({
           message: 'A random picture fetched successfully',
           severity: 'info',
+          onClose: () => {
+            consoleLog('Alert bar closed');
+          },
         });
       } catch (error) {
         const errorMsg =
